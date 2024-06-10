@@ -35,7 +35,7 @@ func getData() []string {
 	for i := 0; i < cap(data); i++ {
 		// see
 		// https://github.com/golang/go/blob/master/src/runtime/string.go#L176
-		data = append(data, strings.Repeat("1", 33<<5+rand.N(2)))
+		data = append(data, strings.Repeat("1", 33<<6+1<<8+rand.N(2)))
 	}
 
 	return data
