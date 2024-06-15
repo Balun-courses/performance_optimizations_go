@@ -4,7 +4,7 @@
 различных приложениях. Например, известный многим [gRPC](https://ru.wikipedia.org/wiki/GRPC), [Java RMI](https://ru.wikipedia.org/wiki/RMI),
 который позволяет иметь несколько JVM с распределенной сборкой мусора.
 
-![img.png](img.png)
+![img.png](resources/img.png)
 
 В любом RPC нужно учитывать транспортный уровень, а также протокол сериализации данных,
 например, в gRPC используется protobuf.
