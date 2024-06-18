@@ -33,9 +33,5 @@ func slowMatch(exampleData []string) [][]byte {
 }
 
 func externalMatchFunction(data []byte) bool {
-	if len(data)%2 == 0 {
-		return true
-	}
-
-	return false
+	return len(data)%2 == 0
 }
