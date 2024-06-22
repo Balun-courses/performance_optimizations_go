@@ -75,9 +75,9 @@ func (t *service) Variadic(ctx context.Context, s string, a ...float64) string {
 func TestGoRmi(t *testing.T) {
 	t.Parallel()
 
-	skeletonProvider := NewRmiSkeletonProvider()
+	stubProvider := NewRmiStubProvider()
 
-	server := httptest.NewServer(skeletonProvider.CreateObjectSkeleton(&service{}))
+	server := httptest.NewServer(stubProvider.CreateObjectStub(&service{}))
 	t.Cleanup(func() {
 		server.Close()
 	})
@@ -150,9 +150,9 @@ func TestGoRmi(t *testing.T) {
 func TestPointers(t *testing.T) {
 	t.Parallel()
 
-	skeletonProvider := NewRmiSkeletonProvider()
+	stubProvider := NewRmiStubProvider()
 
-	server := httptest.NewServer(skeletonProvider.CreateObjectSkeleton(&service{}))
+	server := httptest.NewServer(stubProvider.CreateObjectStub(&service{}))
 	t.Cleanup(func() {
 		server.Close()
 	})

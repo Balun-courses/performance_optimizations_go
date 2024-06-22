@@ -7,20 +7,20 @@ import (
 	"reflect"
 )
 
-type RemoteMethodSkeletonProvider interface {
-	CreateObjectSkeleton(serverObject any) http.HandlerFunc
+type RemoteMethodStubProvider interface {
+	CreateObjectStub(serverObject any) http.HandlerFunc
 }
 
-var _ RemoteMethodSkeletonProvider = (*RmiSkeleton)(nil)
+var _ RemoteMethodStubProvider = (*RmiStubProvider)(nil)
 
-type RmiSkeleton struct {
+type RmiStubProvider struct {
 }
 
-func NewRmiSkeletonProvider() *RmiSkeleton {
-	return &RmiSkeleton{}
+func NewRmiStubProvider() *RmiStubProvider {
+	return &RmiStubProvider{}
 }
 
-func (r *RmiSkeleton) CreateObjectSkeleton(serverObject any) http.HandlerFunc {
+func (r *RmiStubProvider) CreateObjectStub(serverObject any) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		defer func() {
 			if err := recover(); err != nil {
