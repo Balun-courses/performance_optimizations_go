@@ -8,12 +8,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ ubuntu-latest, macos-latest ]
-        include:
-          - os: ubuntu-laptop
-            arch: arm64
-          - os: macos-laptop
-            arch: arm64
+        os: [ macos-latest ]
 
     steps:
       - uses: actions/checkout@v4
