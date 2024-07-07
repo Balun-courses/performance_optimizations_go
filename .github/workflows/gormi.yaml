@@ -22,7 +22,7 @@ jobs:
         run: go mod tidy
       - name: test
         working-directory: ./homeworks/hw2
-        run: go test -json > TestResults.json ./...
+        run: go test ./...
 #      - name: test artifacts
 #        uses: actions/upload-artifact@v4
 #        with:
