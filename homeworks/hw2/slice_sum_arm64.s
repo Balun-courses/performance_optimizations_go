@@ -1,5 +1,4 @@
 #include "textflag.h"
-#include "go_asm.h"
 
 #define ZERO(r) \
     MOVD $0, R2
