@@ -1,9 +1,7 @@
 package main
 
 import (
-	"fmt"
 	"github.com/stretchr/testify/require"
-	"runtime"
 	"testing"
 )
 
@@ -12,8 +10,6 @@ func LowerBound(slice []int64, value int64) int64
 func TestLowerBound(t *testing.T) {
 	t.Parallel()
 
-	fmt.Println("CURRENT ARCH")
-	fmt.Println(runtime.GOARCH)
 	type testCases struct {
 		name   string
 		arg    []int64
