@@ -4,22 +4,27 @@ on: [ push ]
 
 jobs:
   test:
-    runs-on: ubuntu-22.04
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ ubuntu-latest, macos-latest ]
+
     steps:
       - uses: actions/checkout@v4
       - name: setup go
         uses: actions/setup-go@v5
         with:
           go-version: '1.22.2'
-          cache-dependency-path: hw_example/gormi/go.sum
+          cache-dependency-path: homeworks/hw2/go.sum
       - name: dependencies
-        working-directory: ./hw_example/gormi
+        working-directory: ./homeworks/hw2
         run: go mod tidy
       - name: test
-        working-directory: ./hw_example/gormi/
-        run: go test -json > TestResults.json ./...
-      - name: test artifacts
-        uses: actions/upload-artifact@v4
-        with:
-          name: results
-          path: hw_example/gormi/TestResults.json
+        working-directory: ./homeworks/hw2
+        run: go test -v ./...
+#      - name: test artifacts
+#        uses: actions/upload-artifact@v4
+#        with:
+#          name: results
+#          path: ./homeworks/hw2 // TODO
