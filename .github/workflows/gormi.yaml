@@ -4,7 +4,17 @@ on: [ push ]
 
 jobs:
   test:
-    runs-on: ubuntu-22.04
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ ubuntu-latest, macos-latest ]
+        include:
+          - os: ubuntu-laptop
+            arch: arm64
+          - os: macos-laptop
+            arch: arm64
+
     steps:
       - uses: actions/checkout@v4
       - name: setup go
