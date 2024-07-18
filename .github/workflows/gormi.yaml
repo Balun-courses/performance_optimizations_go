@@ -8,7 +8,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ ubuntu-latest, macos-latest ]
+        os: [ ubuntu-latest, macos-latest, windows-latest ]
 
     steps:
       - uses: actions/checkout@v4
@@ -16,12 +16,12 @@ jobs:
         uses: actions/setup-go@v5
         with:
           go-version: '1.22.2'
-          cache-dependency-path: homeworks/hw2/go.sum
+          cache-dependency-path: homeworks/hw1/go.sum
       - name: dependencies
-        working-directory: ./homeworks/hw2
+        working-directory: ./homeworks/hw1
         run: go mod tidy
       - name: test
-        working-directory: ./homeworks/hw2
+        working-directory: ./homeworks/hw1
         run: go test -v ./...
 #      - name: test artifacts
 #        uses: actions/upload-artifact@v4
