@@ -88,7 +88,11 @@ func TestGoMacProcOp(t *testing.T) {
 			main()
 		}()
 
-		err = r2.SetReadDeadline(time.Now().Add(time.Second * 5))
+		if runtime.GOOS != "windows" {
+			err = r2.SetReadDeadline(time.Now().Add(time.Second * 5))
+			require.NoError(t, err)
+		}
+
 		data, err := bufio.NewReader(r2).ReadSlice(models.ActionsDelimiter)
 		require.NoError(t, err)
 		require.Equal(t, models.GoMaxProcOperation, data[0])
@@ -170,8 +174,10 @@ func TestServerDoRequestOp(t *testing.T) {
 		main()
 	}()
 
-	err = r2.SetReadDeadline(time.Now().Add(time.Second * 5))
-	require.NoError(t, err)
+	if runtime.GOOS != "windows" {
+		err = r2.SetReadDeadline(time.Now().Add(time.Second * 5))
+		require.NoError(t, err)
+	}
 
 	data, err := bufio.NewReader(r2).ReadSlice(models.ActionsDelimiter)
 	require.NoError(t, err)
@@ -259,8 +265,10 @@ func TestSetMemoryLimitOp(t *testing.T) {
 			main()
 		}()
 
-		err = r2.SetReadDeadline(time.Now().Add(time.Second * 5))
-		require.NoError(t, err)
+		if runtime.GOOS != "windows" {
+			err = r2.SetReadDeadline(time.Now().Add(time.Second * 5))
+			require.NoError(t, err)
+		}
 
 		data, err := bufio.NewReader(r2).ReadSlice(models.ActionsDelimiter)
 		require.NoError(t, err)
