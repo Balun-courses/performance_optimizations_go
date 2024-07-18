@@ -64,6 +64,8 @@ func TestWatchdog(t *testing.T) {
 	binPath, err := util.GetBinPath(wd)
 	require.NoError(t, err)
 
+	err = os.MkdirAll(binPath, os.ModePerm)
+
 	err = os.Chmod(binPath, os.ModePerm)
 	require.NoError(t, err)
 
