@@ -1,3 +1,5 @@
+//go:build optimized_iterative
+
 package conversion
 
 import (

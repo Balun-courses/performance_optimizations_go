@@ -19,7 +19,7 @@ func NewConstantConfig() Config {
 }
 
 func (c *ConstantConfig) GetApiAddress() (netip.AddrPort, error) {
-	address, err := netip.ParseAddrPort("0.0.0.0:8801")
+	address, err := netip.ParseAddrPort("0.0.0.0:8080")
 
 	if err != nil {
 		return address, fmt.Errorf("can not parse constant address, error - %w", err)

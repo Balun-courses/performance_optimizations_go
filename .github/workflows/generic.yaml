@@ -2,13 +2,16 @@ name: Test CI for Go optimizations course
 
 on: [ push ]
 
+
+# TDOO: classroom
+
 jobs:
   test:
     runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
       matrix:
-        os: [ ubuntu-latest, macos-latest, windows-latest ]
+        os: [ macos-latest ]
 
     steps:
       - uses: actions/checkout@v4
@@ -16,15 +19,10 @@ jobs:
         uses: actions/setup-go@v5
         with:
           go-version: '1.22.2'
-          cache-dependency-path: homeworks/hw1/go.sum
+          cache-dependency-path: open_lessons/asm/go.sum
       - name: dependencies
-        working-directory: ./homeworks/hw1
+        working-directory: ./open_lessons/asm
         run: go mod tidy
       - name: test
-        working-directory: ./homeworks/hw1
+        working-directory: ./open_lessons/asm
         run: go test -v ./...
-#      - name: test artifacts
-#        uses: actions/upload-artifact@v4
-#        with:
-#          name: results
-#          path: ./homeworks/hw2 // TODO

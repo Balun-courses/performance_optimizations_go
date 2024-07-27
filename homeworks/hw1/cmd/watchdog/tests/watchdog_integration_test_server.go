@@ -36,7 +36,7 @@ func main() {
 	}
 
 	if testEnv != "TEST_ENV_DATA" {
-		panic("test inh mismatch")
+		panic("vector_addition inh mismatch")
 	}
 
 	reader := bufio.NewReader(os.Stdin)

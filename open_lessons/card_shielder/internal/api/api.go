@@ -1,3 +1,5 @@
+//go:build recursive || optimized_recursive || iterative || optimized_iterative
+
 package api
 
 import (
