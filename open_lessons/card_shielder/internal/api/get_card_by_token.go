@@ -1,3 +1,5 @@
+//go:build recursive || optimized_recursive || iterative || optimized_iterative
+
 package api
 
 import (
@@ -51,7 +53,7 @@ func (c *CardApiImpl) GetCardByToken(w http.ResponseWriter, r *http.Request) {
 		logger.LogAttrs(
 			r.Context(),
 			slog.LevelError,
-			"can not write response data",
+			"can not write response ammo_template.txt",
 			slog.Any("error", err),
 		)
 
@@ -59,4 +61,6 @@ func (c *CardApiImpl) GetCardByToken(w http.ResponseWriter, r *http.Request) {
 
 		return
 	}
+
+	logger.Info("OK")
 }

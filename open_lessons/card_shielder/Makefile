@@ -1,6 +1,17 @@
 CURDIR=$(shell pwd)
 BINDIR=${CURDIR}/bin
+PPROFDIR=${CURDIR}/pprof
 PACKAGE=${CURDIR}/cmd/card_shielder
+
+# ---------------------------------------- PROFILING ----------------------------------------
+.PHONY: cpuprof
+cpuprof:
+	(PPROF_TMPDIR=${PPROFDIR} go tool pprof -http :8081 -seconds 20 http://127.0.0.1:8080/debug/pprof/profile)
+
+.PHONE: memprof
+memprof:
+	(PPROF_TMPDIR=${PPROFDIR} go tool pprof -http :8081 http://127.0.0.1:8080/debug/pprof/heap)
+# ---------------------------------------- PROFILING ----------------------------------------
 
 # ---------------------------------------- SERVER ----------------------------------------
 .PHONY: server
@@ -29,7 +40,7 @@ mem_profile: build
 .PHONY: build
 build: bind-deps
 	go mod tidy
-	go build -o ${BINDIR}/server ${PACKAGE}
+	go build -o ${BINDIR}/server -tags=optimized_iterative ${PACKAGE}
 # ---------------------------------------- BUILD ----------------------------------------
 
 

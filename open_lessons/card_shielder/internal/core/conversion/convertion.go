@@ -1,3 +1,5 @@
+//go:build recursive || optimized_recursive || iterative || optimized_iterative
+
 package conversion
 
 import (
@@ -39,7 +41,7 @@ func (c *CardConverterImpl) GetTokenByCardNumber(cardNumber entity.CardNumber) (
 			return "", err
 		}
 
-		result.Write([]byte(strconv.FormatUint(IterativeFibonacci(int(cur)), 10)))
+		result.WriteString(strconv.FormatUint(Fibonacci(int(cur)), 10))
 	}
 
 	return entity.CardToken(result.String()), nil
@@ -69,7 +71,7 @@ func getFibSerialByNumber(fibNumber uint64) (int, error) {
 	i := int(math.Log(float64(fibNumber)*math.Sqrt(5)+0.5)/math.Log(phi)) - 5
 
 	for ; i <= math.MaxInt; i++ {
-		if OptimizedIterativeFibonacci(i) == fibNumber {
+		if Fibonacci(i) == fibNumber {
 			return i, nil
 		}
 	}

@@ -1,4 +1,6 @@
-package main
+//go:build recursive || optimized_recursive || iterative || optimized_iterative
+
+package card_shielder
 
 import (
 	"card_shielder/internal/api"
@@ -15,7 +17,7 @@ import (
 	"time"
 )
 
-func main() {
+func Run() {
 	ctx, cancel := signal.NotifyContext(context.Background(), syscall.SIGTERM, syscall.SIGINT)
 	defer cancel()
 
