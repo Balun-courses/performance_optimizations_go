@@ -37,7 +37,6 @@ func main() {
 	semaphore := NewSemaphore(15)
 
 	client := http.DefaultTransport.(*http.Transport).Clone()
-	client.DisableKeepAlives = true // TODO
 	client.IdleConnTimeout = time.Millisecond * 300
 	client.MaxIdleConnsPerHost = client.MaxIdleConns
 
