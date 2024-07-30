@@ -23,8 +23,3 @@ jobs:
       - name: test
         working-directory: ./homeworks/hw1
         run: go test -v ./...
-#      - name: test artifacts
-#        uses: actions/upload-artifact@v4
-#        with:
-#          name: results
-#          path: ./homeworks/hw2 // TODO
