@@ -1,6 +1,6 @@
 #include "textflag.h"
 
-TEXT ·vectorAddition(SB), NOSPLIT, $0
+TEXT ·vectorAdditionV1(SB), NOSPLIT, $0
     LDP first_base+0(FP), (R0, R1)
     LDP second_base+24(FP), (R2, R3)
     LDP dst_base+48(FP), (R4, R5)

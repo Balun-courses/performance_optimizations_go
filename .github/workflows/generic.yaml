@@ -1,0 +1,28 @@
+name: Test CI for Go optimizations course
+
+on: [ push ]
+
+
+# TDOO: classroom
+
+jobs:
+  test:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ macos-latest ]
+
+    steps:
+      - uses: actions/checkout@v4
+      - name: setup go
+        uses: actions/setup-go@v5
+        with:
+          go-version: '1.22.2'
+          cache-dependency-path: open_lessons/asm/go.sum
+      - name: dependencies
+        working-directory: ./open_lessons/asm
+        run: go mod tidy
+      - name: test
+        working-directory: ./open_lessons/asm
+        run: go test -v ./...

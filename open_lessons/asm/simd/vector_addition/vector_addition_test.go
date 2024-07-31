@@ -1,17 +1,18 @@
 package main
 
 import (
+	"github.com/stretchr/testify/require"
 	"math/rand/v2"
 	"testing"
 )
-
-func vectorAddition(first, second, dst []uint32)
 
 func vectorAdditionV0(first, second, dst []uint32) {
 	for i := 0; i < len(first); i++ {
 		dst[i] = first[i] + second[i]
 	}
 }
+
+func vectorAdditionV1(first, second, dst []uint32)
 
 func BenchmarkAdd(b *testing.B) {
 	b.Run("SIMD vector addition", func(b *testing.B) {
@@ -20,7 +21,7 @@ func BenchmarkAdd(b *testing.B) {
 		b.StartTimer()
 
 		for i := 0; i < b.N; i++ {
-			vectorAddition(f, s, dst)
+			vectorAdditionV1(f, s, dst)
 		}
 	})
 
@@ -33,6 +34,37 @@ func BenchmarkAdd(b *testing.B) {
 			vectorAdditionV0(f, s, dst)
 		}
 	})
+}
+
+func TestVectorAddition(t *testing.T) {
+	t.Parallel()
+
+	first := make([]uint32, 160)
+
+	for i := 0; i < 160; i++ {
+		first[i] = 10
+	}
+
+	second := make([]uint32, 160)
+
+	for i := 0; i < 160; i++ {
+		second[i] = 20
+	}
+
+	dstV0 := make([]uint32, 160)
+	dstV1 := make([]uint32, 160)
+
+	expDst := make([]uint32, 160)
+
+	for i := 0; i < 160; i++ {
+		expDst[i] = 30
+	}
+
+	vectorAdditionV0(first, second, dstV0)
+	vectorAdditionV1(first, second, dstV1)
+
+	require.Equal(t, expDst, dstV1)
+	require.Equal(t, dstV1, dstV0)
 }
 
 // assume alignment
