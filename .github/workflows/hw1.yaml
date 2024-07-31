@@ -4,7 +4,7 @@
 
 # TODO
 #jobs:
-#  test:
+#  vector_addition:
 #    runs-on: ${{ matrix.os }}
 #    strategy:
 #      fail-fast: false
@@ -21,6 +21,6 @@
 #      - name: dependencies
 #        working-directory: ./homeworks/hw1
 #        run: go mod tidy
-#      - name: test
+#      - name: vector_addition
 #        working-directory: ./homeworks/hw1
-#        run: go test -v ./...
+#        run: go vector_addition -v ./...
