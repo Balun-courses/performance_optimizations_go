@@ -1,5 +1,6 @@
 #include "textflag.h"
 
+// func vectorAdditionV1(first, second, dst []uint8)
 TEXT ·vectorAdditionV1(SB), NOSPLIT, $0
     LDP first_base+0(FP), (R0, R1)
     LDP second_base+24(FP), (R2, R3)
@@ -14,13 +15,13 @@ loop:
     CMP R5, R7
     BGE done
 
-    VLD1 (R12), [V1.S4]
-    VLD1 (R13), [V2.S4]
-    VADD V1.S4, V2.S4, V3.S4
+    VLD1 (R12), [V1.B16]
+    VLD1 (R13), [V2.B16]
+    VADD V1.B16, V2.B16, V3.B16
 
-    VST1 [V3.S4], (R11)
+    VST1 [V3.B16], (R11)
 
-    ADD $4, R7
+    ADD $16, R7
 
     ADD $16, R11
     ADD $16, R12
