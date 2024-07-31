@@ -8,9 +8,9 @@ func Fibonacci(n int) uint64 {
 		cur  uint64
 	)
 
-	prev, cur = 1, 1
+	prev, cur = 0, 1
 
-	for i := 2; i < n; i++ {
+	for i := 2; i <= n; i++ {
 		prev, cur = cur, prev+cur
 	}
 
