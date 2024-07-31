@@ -6,13 +6,13 @@ import (
 	"testing"
 )
 
-func vectorAdditionV0(first, second, dst []uint32) {
+func vectorAdditionV0(first, second, dst []uint8) {
 	for i := 0; i < len(first); i++ {
 		dst[i] = first[i] + second[i]
 	}
 }
 
-func vectorAdditionV1(first, second, dst []uint32)
+func vectorAdditionV1(first, second, dst []uint8)
 
 func BenchmarkAdd(b *testing.B) {
 	b.Run("SIMD vector addition", func(b *testing.B) {
@@ -39,22 +39,22 @@ func BenchmarkAdd(b *testing.B) {
 func TestVectorAddition(t *testing.T) {
 	t.Parallel()
 
-	first := make([]uint32, 160)
+	first := make([]uint8, 160)
 
 	for i := 0; i < 160; i++ {
 		first[i] = 10
 	}
 
-	second := make([]uint32, 160)
+	second := make([]uint8, 160)
 
 	for i := 0; i < 160; i++ {
 		second[i] = 20
 	}
 
-	dstV0 := make([]uint32, 160)
-	dstV1 := make([]uint32, 160)
+	dstV0 := make([]uint8, 160)
+	dstV1 := make([]uint8, 160)
 
-	expDst := make([]uint32, 160)
+	expDst := make([]uint8, 160)
 
 	for i := 0; i < 160; i++ {
 		expDst[i] = 30
@@ -68,20 +68,20 @@ func TestVectorAddition(t *testing.T) {
 }
 
 // assume alignment
-func getData() ([]uint32, []uint32, []uint32) {
-	first := make([]uint32, 1_000_000)
+func getData() ([]uint8, []uint8, []uint8) {
+	first := make([]uint8, 1_000_000)
 
 	for i := 0; i < len(first); i++ {
-		first[i] = rand.N[uint32](5)
+		first[i] = rand.N[uint8](5)
 	}
 
-	second := make([]uint32, 1_000_000)
+	second := make([]uint8, 1_000_000)
 
 	for i := 0; i < len(second); i++ {
-		second[i] = rand.N[uint32](5)
+		second[i] = rand.N[uint8](5)
 	}
 
-	dst := make([]uint32, 1_000_000)
+	dst := make([]uint8, 1_000_000)
 
 	return first, second, dst
 }
