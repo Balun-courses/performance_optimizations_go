@@ -1,5 +1,7 @@
 #include "textflag.h"
 
+// TODO: add code emulation
+
 // func Fibonacci(n uint64) uint64
 TEXT ·Fibonacci(SB), NOSPLIT, $0
     MOVD n+0(FP), R0

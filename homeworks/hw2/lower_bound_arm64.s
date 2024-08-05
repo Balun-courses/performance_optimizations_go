@@ -29,6 +29,9 @@ loop:
     MOVD (R12), R5
     CMP R2, R5
 
+// assembly
+  // CMP R1, R3        // Сравнивает значения в регистрах R1 и R3.
+  // CSEL R6, R1, R3, LT  // R6 = если R1 < R3, то R1, иначе R3
     CSEL LE, R13, R3, R3
     CSEL GT, R13, R1, R1
 

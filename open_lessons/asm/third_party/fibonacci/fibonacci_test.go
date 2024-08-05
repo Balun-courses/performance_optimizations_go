@@ -41,7 +41,7 @@ func TestFibonacci(t *testing.T) {
 			expResult: 55,
 		},
 		{
-			name:      "one hundred",
+			name:      "70",
 			n:         70,
 			expResult: 190392490709135,
 		},

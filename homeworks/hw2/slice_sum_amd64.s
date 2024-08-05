@@ -3,8 +3,6 @@
 #define ZERO(r) \
     XORQ r, r
 
-// TODO: comments
-
 // func SumSlice(s []int32) int64
 TEXT ·SumSlice(SB), NOSPLIT, $0
     MOVQ x_base+0(FP), AX // ptr
@@ -15,6 +13,10 @@ loop:
     CMPQ DX, $0
     JE done
     XORQ CX, CX
+
+    // Move Long to Quad with Sign extend
+    // Правильно расширяем 32-битное до 64-битного
+    // в случае отрицательных значений
     MOVLQSX (AX), R9
     ADDQ R9, R10
 

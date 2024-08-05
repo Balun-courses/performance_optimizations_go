@@ -3,8 +3,6 @@
 #define ZERO(r) \
     MOVQ $0, R2
 
-// TODO: comments
-
 // func WordCount(data []rune) int32
 TEXT ·WordCount(SB), $32-24
     MOVQ data_base+0(FP), AX
