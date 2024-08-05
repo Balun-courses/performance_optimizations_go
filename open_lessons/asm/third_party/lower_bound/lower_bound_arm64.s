@@ -20,7 +20,7 @@ loop:
     MOVD R7, R13
 
     MOVD $8, R11
-    MUL R11, R7, R7
+    MUL R11, R7, R7 // middle = (right - left)/2 + left
     ADD R7, R0, R12
 
     MOVD (R12), R5

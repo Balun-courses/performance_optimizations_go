@@ -24,6 +24,7 @@ loop:
 
     CMPQ R11, CX
 
+    // TODO: open_lesson
     CMOVQLE R10, R8
     CMOVQGT R10, R9
 
