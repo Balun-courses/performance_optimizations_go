@@ -14,7 +14,7 @@ func SliceContainsV0(s []uint8, target uint8) bool {
 func SliceContainsV1(s []uint8, target uint8) bool
 
 func BenchmarkSliceContains(b *testing.B) {
-	b.Run("SIMD contains", func(b *testing.B) {
+	b.Run("SliceContainsV1 (SIMD)", func(b *testing.B) {
 		b.StopTimer()
 		s, target := getData()
 		b.StartTimer()
@@ -24,7 +24,7 @@ func BenchmarkSliceContains(b *testing.B) {
 		}
 	})
 
-	b.Run("simple contains", func(b *testing.B) {
+	b.Run("SliceContainsV0", func(b *testing.B) {
 		b.StopTimer()
 		s, target := getData()
 		b.StartTimer()
@@ -36,17 +36,49 @@ func BenchmarkSliceContains(b *testing.B) {
 }
 
 func TestSliceContains(t *testing.T) {
-	s, target := getData()
-	require.Equal(t, target, s[len(s)-1])
+	t.Parallel()
 
-	// always last match
-	require.False(t, slices.Contains(s[:len(s)-1], target))
+	t.Run("latest match", func(t *testing.T) {
+		t.Parallel()
+		s, target := getData()
+		require.Equal(t, target, s[len(s)-1])
 
-	simd := SliceContainsV0(s, target)
-	simple := SliceContainsV1(s, target)
+		// always last match
+		require.False(t, slices.Contains(s[:len(s)-1], target))
 
-	require.True(t, simd)
-	require.True(t, simple)
+		simd := SliceContainsV0(s, target)
+		simple := SliceContainsV1(s, target)
+
+		require.True(t, simd)
+		require.True(t, simple)
+	})
+
+	t.Run("middle match", func(t *testing.T) {
+		t.Parallel()
+
+		s, target := getData()
+		s = s[:len(s)-1]
+		s[len(s)/2] = target
+
+		simd := SliceContainsV0(s, target)
+		simple := SliceContainsV1(s, target)
+
+		require.True(t, simd)
+		require.True(t, simple)
+	})
+
+	t.Run("no match", func(t *testing.T) {
+		t.Parallel()
+
+		s, target := getData()
+		s[len(s)-1]--
+
+		simd := SliceContainsV0(s, target)
+		simple := SliceContainsV1(s, target)
+
+		require.False(t, simd)
+		require.False(t, simple)
+	})
 }
 
 // 16-bit alignment

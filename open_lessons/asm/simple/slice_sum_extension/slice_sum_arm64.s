@@ -12,12 +12,12 @@ TEXT ·SumSlice(SB), NOSPLIT, $0
     ZERO(R2)
 
 loop:
-    CBZ R1, done // Если R1 == 0, то переходим на метку done
+    CBZ R1, done // for R1 != 0 {}
     MOVW (R0), R9 // R9 = s[i]
     ADD R9, R2 // R2 += R9
-    ADD $4, R0 // i++
-    SUB $1, R1 // len--
-    B loop // for range ...
+    ADD $4, R0 // R0++
+    SUB $1, R1 // R1--
+    B loop //
 
 done:
     MOVD R2, ret+24(FP)

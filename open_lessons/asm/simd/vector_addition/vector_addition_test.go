@@ -15,7 +15,7 @@ func vectorAdditionV0(first, second, dst []uint8) {
 func vectorAdditionV1(first, second, dst []uint8)
 
 func BenchmarkAdd(b *testing.B) {
-	b.Run("SIMD vector addition", func(b *testing.B) {
+	b.Run("vectorAdditionV1 (SIMD)", func(b *testing.B) {
 		b.StopTimer()
 		f, s, dst := getData()
 		b.StartTimer()
@@ -25,7 +25,7 @@ func BenchmarkAdd(b *testing.B) {
 		}
 	})
 
-	b.Run("simple vector addition", func(b *testing.B) {
+	b.Run("vectorAdditionV0", func(b *testing.B) {
 		b.StopTimer()
 		f, s, dst := getData()
 		b.StartTimer()
