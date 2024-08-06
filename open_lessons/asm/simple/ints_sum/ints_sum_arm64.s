@@ -4,6 +4,13 @@
 
 // func IntSum(a, b int64) int64
 // . и / заменены из-за синтаксиса, например, (math∕rand·Int)
+
+// type SliceHeader struct {
+//  Data uintptr
+//	Len  int
+//	Cap  int
+//}
+
 TEXT ·IntSum(SB), NOSPLIT, $0 // $x-y (x - размер фрейма, y - размер аргументов. В случае NOSPLIT можно $0)
     LDP slice_base+0(FP), (R0, R1) // Загружаем в R0 и R1 аргументы функции
     ADD R0, R1 // Прибавляем к R1 += R0
