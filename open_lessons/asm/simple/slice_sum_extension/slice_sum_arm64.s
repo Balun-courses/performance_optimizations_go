@@ -4,6 +4,12 @@
 #define ZERO(r) \
     MOVD $0, r
 
+// type SliceHeader struct {
+//  Data uintptr
+//	Len  int
+//	Cap  int
+//}
+
 // func SumSlice(s []int32) int64
 TEXT ·SumSlice(SB), NOSPLIT, $0
     // Header слайса 24 байта
