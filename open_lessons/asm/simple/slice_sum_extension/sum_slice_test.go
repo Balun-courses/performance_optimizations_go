@@ -7,7 +7,6 @@ import (
 )
 
 func SumSlice(x []int32) int64
-
 func TestSumSlice(t *testing.T) {
 	t.Parallel()
 
@@ -47,7 +46,7 @@ func TestSumSlice(t *testing.T) {
 
 	for _, tt := range tableTests {
 		tt := tt // go 1.21-
-		
+
 		t.Run(tt.name, func(t *testing.T) {
 			t.Parallel()
 

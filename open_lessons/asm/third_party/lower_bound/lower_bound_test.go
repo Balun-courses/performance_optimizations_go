@@ -6,7 +6,6 @@ import (
 )
 
 func LowerBound(slice []int64, value int64) int64
-
 func TestLowerBound(t *testing.T) {
 	t.Parallel()
 
