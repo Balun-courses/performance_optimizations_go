@@ -10,6 +10,16 @@
 //	Cap  int
 //}
 
+// func SumSlice(x []int32) int64 {
+//	var result int64
+//
+//	for i := range x {
+//		result += int64(x[i])
+//	}
+//
+//	return result
+//}
+
 // func SumSlice(s []int32) int64
 TEXT ·SumSlice(SB), NOSPLIT, $0
     // Header слайса 24 байта

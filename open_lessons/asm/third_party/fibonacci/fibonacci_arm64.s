@@ -1,5 +1,23 @@
 #include "textflag.h"
 
+// I: n >= 0
+// func Fibonacci(n uint64) uint64 {
+//	if n == 0 {
+//		return 0
+//	}
+//
+//	var (
+//		prev uint64 = 0
+//		cur  uint64 = 1
+//	)
+//
+//	for i := 2; i <= int(n); i++ {
+//		prev, cur = cur, prev+cur
+//	}
+//
+//	return cur
+//}
+
 // func Fibonacci(n uint64) uint64
 TEXT ·Fibonacci(SB), NOSPLIT, $0
     MOVD n+0(FP), R0 // R0 := n

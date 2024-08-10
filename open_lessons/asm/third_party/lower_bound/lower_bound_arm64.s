@@ -3,6 +3,23 @@
 #define ZERO(r) \
     MOVD $0, R2
 
+// func LowerBound(slice []int64, value int64) int64 {
+//	leftBorder := -1
+//	rightBorder := len(slice)
+//
+//	for rightBorder-leftBorder > 1 {
+//		middle := (rightBorder-leftBorder)>>1 + leftBorder
+//
+//		if slice[middle] <= value {
+//			leftBorder = middle
+//		} else {
+//			rightBorder = middle
+//		}
+//	}
+//
+//	return int64(leftBorder)
+//}
+
 // func LowerBound(data []int64, target int64) int64
 TEXT ·LowerBound(SB), NOSPLIT, $0
     LDP slice_base+0(FP), (R0, R1) // R0 := data.ptr, R1 := len(data)

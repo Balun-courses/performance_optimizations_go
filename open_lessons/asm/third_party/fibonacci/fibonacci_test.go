@@ -6,7 +6,6 @@ import (
 )
 
 func Fibonacci(n uint64) uint64
-
 func TestFibonacci(t *testing.T) {
 	t.Parallel()
 
