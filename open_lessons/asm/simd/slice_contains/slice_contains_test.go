@@ -81,7 +81,7 @@ func TestSliceContains(t *testing.T) {
 	})
 }
 
-// 16-bit alignment
+// 16 alignment
 func getData() ([]uint8, uint8) {
 	s := make([]uint8, 1_000_000)
 
