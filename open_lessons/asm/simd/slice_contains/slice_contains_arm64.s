@@ -12,11 +12,10 @@ loop:
     VLD1.P 16(R0), [V2.B16]
     VCMEQ V1.B16, V2.B16, V3.B16
 
-    VMOV V3.D[0], R4
-    VMOV V3.D[1], R5
+    VADDV V3.B16, V2
+    VMOV V2.H[0], R4
 
     CBNZ R4, yes
-    CBNZ R5, yes
 
     SUB $16, R1
 

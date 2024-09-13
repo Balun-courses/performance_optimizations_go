@@ -1,6 +1,7 @@
-package slice_contains
+package main
 
 import (
+	"asm/simd/slice_contains/cgo"
 	"github.com/stretchr/testify/require"
 	"math/rand/v2"
 	"slices"
@@ -22,6 +23,7 @@ func BenchmarkSliceContains(b *testing.B) {
 		for i := 0; i < b.N; i++ {
 			SliceContainsV1(s, target)
 		}
+
 	})
 
 	b.Run("SliceContainsV0", func(b *testing.B) {
@@ -31,6 +33,16 @@ func BenchmarkSliceContains(b *testing.B) {
 
 		for i := 0; i < b.N; i++ {
 			SliceContainsV0(s, target)
+		}
+	})
+
+	b.Run("SliceContainsCgo", func(b *testing.B) {
+		b.StopTimer()
+		s, target := getData()
+		b.StartTimer()
+
+		for i := 0; i < b.N; i++ {
+			cgo.SliceContains(s, target)
 		}
 	})
 }
@@ -48,9 +60,11 @@ func TestSliceContains(t *testing.T) {
 
 		simd := SliceContainsV0(s, target)
 		simple := SliceContainsV1(s, target)
+		cgoResult := cgo.SliceContains(s, target)
 
 		require.True(t, simd)
 		require.True(t, simple)
+		require.True(t, cgoResult)
 	})
 
 	t.Run("middle match", func(t *testing.T) {
@@ -62,9 +76,11 @@ func TestSliceContains(t *testing.T) {
 
 		simd := SliceContainsV0(s, target)
 		simple := SliceContainsV1(s, target)
+		cgoResult := cgo.SliceContains(s, target)
 
 		require.True(t, simd)
 		require.True(t, simple)
+		require.True(t, cgoResult)
 	})
 
 	t.Run("no match", func(t *testing.T) {
@@ -75,9 +91,11 @@ func TestSliceContains(t *testing.T) {
 
 		simd := SliceContainsV0(s, target)
 		simple := SliceContainsV1(s, target)
+		cgoResult := cgo.SliceContains(s, target)
 
 		require.False(t, simd)
 		require.False(t, simple)
+		require.False(t, cgoResult)
 	})
 }
 
